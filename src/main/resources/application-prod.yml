@@ -1,0 +1,14 @@
+spring:
+  config:
+    activate:
+      on-profile: prod
+
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://${MYSQL_DB_HOST}:${MYSQL_DB_PORT}/${MYSQL_DB_NAME}
+    username: ${MYSQL_DB_USER}
+    password: ${MYSQL_DB_PASS}
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    show-sql: false
