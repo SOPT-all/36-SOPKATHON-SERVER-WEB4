@@ -1,6 +1,5 @@
 spring:
   config:
-    import: optional:file:.env[.properties]
     activate:
       on-profile: prod
 
@@ -11,5 +10,5 @@ spring:
     password: ${MYSQL_DB_PASS}
   jpa:
     hibernate:
-      ddl-auto: validate
+      ddl-auto: none
     show-sql: false
