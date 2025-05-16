@@ -7,10 +7,12 @@ services:
     ports:
       - "8080:8080"
     environment:
-      - DB_URL=${MYSQL_DB_URL}
-      - DB_USERNAME=${POSTGRES_USER}
-      - DB_PASSWORD=${POSTGRES_PASSWORD}
-      - SPRING_PROFILES_ACTIVE=${SPRING_PROFILES_ACTIVE}
+      MYSQL_DB_HOST: ${MYSQL_DB_HOST}
+      MYSQL_DB_PORT: ${MYSQL_DB_PORT}
+      MYSQL_DB_USER: ${MYSQL_DB_USER}
+      MYSQL_DB_PASS: ${MYSQL_DB_PASS}
+      MYSQL_DB_NAME: ${MYSQL_DB_NAME}
+      SPRING_PROFILES_ACTIVE: ${SPRING_PROFILES_ACTIVE}
 
   nginx:
     image: nginx:alpine
