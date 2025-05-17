@@ -23,4 +23,14 @@ public class UserServiceImpl implements UserService {
                 ));
         return new UserSignupResponseDto(user.getName());
     }
+
+    @Override
+    public UserSignupResponseDto registerNewMember(UserSignupRequestDto userSignupRequestDto){
+        User newUser = User.builder()
+                .name(userSignupRequestDto.name())
+                .build();
+        User savedUser = userRepository.save(newUser);
+
+        return new UserSignupResponseDto(savedUser.getName());
+    }
 }
