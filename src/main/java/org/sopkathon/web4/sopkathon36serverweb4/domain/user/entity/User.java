@@ -5,6 +5,7 @@ import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.sopkathon.web4.sopkathon36serverweb4.domain.user.enums.Part;
 import org.sopkathon.web4.sopkathon36serverweb4.global.common.entity.BaseEntity;
 
 import java.time.LocalDateTime;
@@ -22,9 +23,16 @@ public class User extends BaseEntity {
     @Column(name = "name", nullable = false)
     private String name;
 
+    @Enumerated(EnumType.STRING)
+    private Part part;
+
     @Builder
     private User(long id, String name) {
         this.id = id;
         this.name = name;
+    }
+
+    public void setPart(final Part part) {
+        this.part = part;
     }
 }
