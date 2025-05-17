@@ -31,7 +31,7 @@ public class UserServiceImpl implements UserService {
 
         UserNameResponseDto userNameResponseDto = getUserNameByToken(token);
         System.out.println(userNameResponseDto.userName());
-        return new UserSignupResponseDto(token);
+        return new UserSignupResponseDto(true, token);
     }
 
     @Override
@@ -41,7 +41,7 @@ public class UserServiceImpl implements UserService {
                 .build();
         User savedUser = userRepository.save(newUser);
 
-        return new UserSignupResponseDto(savedUser.getName());
+        return new UserSignupResponseDto(false, savedUser.getName());
     }
 
     @Override
