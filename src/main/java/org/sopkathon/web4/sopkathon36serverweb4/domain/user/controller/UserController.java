@@ -8,16 +8,16 @@ import org.sopkathon.web4.sopkathon36serverweb4.global.common.response.ApiRespon
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/login")
 public class UserController {
-    private final UserService userService;
 
-    @PostMapping
-    public ResponseEntity<ApiResponse<UserSignupResponseDto>> getByName(@RequestBody UserSignupRequestDto userSignupRequestDto) {
-        return ResponseEntity.ok(ApiResponse.success(userService.findByName(userSignupRequestDto)));
-    }
+  private final UserService userService;
+
+  @PostMapping
+  public ResponseEntity<ApiResponse<UserSignupResponseDto>> loginAndSignUp(
+      @RequestBody UserSignupRequestDto userSignupRequestDto) {
+    return ResponseEntity.ok(ApiResponse.success(userService.getOrCreateGetUserToken(userSignupRequestDto)));
+  }
 }

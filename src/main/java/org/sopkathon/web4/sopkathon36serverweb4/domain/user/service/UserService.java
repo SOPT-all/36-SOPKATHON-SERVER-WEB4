@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 public interface UserService {
-    UserSignupResponseDto findByName(UserSignupRequestDto userSignupRequestDto);
+    UserSignupResponseDto getOrCreateGetUserToken(UserSignupRequestDto userSignupRequestDto);
     UserNameResponseDto getUserNameByToken(String token);
     UserSignupResponseDto registerNewMember(UserSignupRequestDto userSignupRequestDto);
 }
