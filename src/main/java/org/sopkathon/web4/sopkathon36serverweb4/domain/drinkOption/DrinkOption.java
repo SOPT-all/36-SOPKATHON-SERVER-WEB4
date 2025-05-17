@@ -2,14 +2,19 @@ package org.sopkathon.web4.sopkathon36serverweb4.domain.drinkOption;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.sopkathon.web4.sopkathon36serverweb4.domain.drink.Drink;
+import org.sopkathon.web4.sopkathon36serverweb4.domain.options.Option;
 import org.sopkathon.web4.sopkathon36serverweb4.global.common.entity.BaseEntity;
 
 @Entity
@@ -22,15 +27,19 @@ public class DrinkOption extends BaseEntity {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id; // PK가 명확하지 않으면 임시 PK 추가
 
-  @Column(name = "drink_id")
-  private Long drinkId;
+  // Drink와 다대일 관계 (N:1)
+  @ManyToOne(fetch = FetchType.LAZY)
+  @JoinColumn(name = "drink_id", nullable = false)
+  private Drink drink;
 
-  @Column(name = "option_id")
-  private Long optionId;
+  // Option과 다대일 관계 (N:1)
+  @ManyToOne(fetch = FetchType.LAZY)
+  @JoinColumn(name = "option_id", nullable = false)
+  private Option option;
 
   @Builder
-  public DrinkOption(final Long drinkId, final Long optionId) {
-    this.drinkId = drinkId;
-    this.optionId = optionId;
+  public DrinkOption(final Drink drink, final Option option) {
+    this.option = option;
+    this.drink = drink;
   }
 }

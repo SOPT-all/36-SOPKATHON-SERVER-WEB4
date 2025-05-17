@@ -99,7 +99,6 @@ public class QuestionDataSeeder implements CommandLineRunner {
     optionRepository.saveAll(dummyOptions);
     drinkRepository.saveAll(dummyDrinks);
 
-    // drinks, options: id 오름차순 정렬된 리스트 (실제 DB PK 순서)
     List<Drink> drinks = drinkRepository.findAll(Sort.by("id")); // size 16
     List<Option> options = optionRepository.findAll(Sort.by("id")); // size 8
 
@@ -117,8 +116,8 @@ public class QuestionDataSeeder implements CommandLineRunner {
         Option option = options.get(optionIdx); // 실제 DB option 엔티티
         drinkOptions.add(
             DrinkOption.builder()
-                .drinkId(drink.getId())   // 실제 DB id 사용
-                .optionId(option.getId()) // 실제 DB id 사용
+                .drink(drink)     // 엔티티 자체로 전달
+                .option(option)   // 엔티티 자체로 전달
                 .build()
         );
       }
