@@ -1,4 +1,7 @@
 spring:
+  web:
+    resources:
+      static-locations: file:/app/images/
   config:
     activate:
       on-profile: prod

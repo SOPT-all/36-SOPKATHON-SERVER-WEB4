@@ -65,6 +65,7 @@ public class QuestionApiServiceImpl implements QuestionApiService {
         .location(drink.getLocation())
         .drinkName(drink.getName())
         .drinkDescription(drink.getDescription())
+        .imageUrl(drink.getImageLink())
         .userName("test")
         .build();
   }
