@@ -1,0 +1,52 @@
+name: safe-bridge-backend CI/CD
+
+on:
+  push:
+    branches:
+      - main   # main만 감지
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Setup Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: 21
+
+      - name: Setup Gradle
+        uses: gradle/actions/setup-gradle@v4
+
+      - name: Build with Gradle
+        run: ./gradlew build
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
+
+      - name: Login to Docker Hub
+        run: echo "${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}" | docker login -u "${{ secrets.DOCKER_HUB_USERNAME }}" --password-stdin
+
+      - name: Build & Push Docker Image
+        run: |
+          docker buildx build --platform linux/amd64 \
+            -t bingle625/gdg-cau-team5-backend:latest \
+            --push .
+
+      - name: Deploy to EC2
+        uses: appleboy/ssh-action@v0.1.7
+        with:
+          host: ${{ secrets.EC2_HOST }}
+          username: ${{ secrets.EC2_USER }}
+          key: ${{ secrets.EC2_SSH_KEY }}
+          script: |
+            cd ~/DOMAINS/safe-bridge
+            docker-compose pull
+            docker-compose down
+            # docker-compose.yml에서 run 환경변수 지정 필요
+            docker-compose up -d
+            docker ps
