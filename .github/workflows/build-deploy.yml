@@ -1,4 +1,4 @@
-name: safe-bridge-backend CI/CD
+name: 36-sopkathon-server-web4 build & deploy
 
 on:
   push:
