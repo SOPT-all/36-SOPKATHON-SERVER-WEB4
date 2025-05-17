@@ -34,7 +34,7 @@ jobs:
       - name: Build & Push Docker Image
         run: |
           docker buildx build --platform linux/amd64 \
-            -t bingle625/gdg-cau-team5-backend:latest \
+            -t ${{ secrets.DOCKER_HUB_USERNAME }}/${{ secrets.DOCKER_HUB_REPOSITORY }} \
             --push .
 
       - name: Deploy to EC2
@@ -45,9 +45,7 @@ jobs:
           key: ${{ secrets.EC2_SSH_KEY }}
           script: |
             cd ${{ secrets.DEPLOY_PROJECT_PATH }}
-            cd ~/DOMAINS/safe-bridge
             docker-compose pull
             docker-compose down
-            # docker-compose.yml에서 run 환경변수 지정 필요
             docker-compose up -d
             docker ps
