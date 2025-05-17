@@ -10,18 +10,24 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @RequiredArgsConstructor
-@Transactional(readOnly = true)
 public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
+    private final JwtTokenProvider jwtTokenProvider;
+    private static final int TOKEN_EXPIRY_MINUTES = 60;
 
     @Override
     public UserSignupResponseDto findByName(UserSignupRequestDto userSignupRequestDto) {
         User user = userRepository
                 .findByName(userSignupRequestDto.name())
                 .orElseThrow(() -> new IllegalArgumentException(
-                        "User not found with name: " + userSignupRequestDto.name()
+                        "유효하지 않은 유저입니다.: " + userSignupRequestDto.name()
                 ));
-        return new UserSignupResponseDto(user.getName());
+        String token = jwtTokenProvider.token(
+                user.getId(),
+                user.getName(),
+                TOKEN_EXPIRY_MINUTES
+        );
+        return new UserSignupResponseDto(token);
     }
 
     @Override
