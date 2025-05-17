@@ -18,9 +18,9 @@ public class SwaggerConfig {
 
   private Info apiInfo() {
     return new Info()
-        .title("hyundai-card rest api")
-        .description("SOPT 합동세미나 데스크탑 웹 1조 api 입니다.")
-        .version("1.0.0");
+        .title("sopkathon-web4 rest api")
+        .description("SOPT 해커톤 rest api")
+        .version("1.1.0");
   }
 
 }
