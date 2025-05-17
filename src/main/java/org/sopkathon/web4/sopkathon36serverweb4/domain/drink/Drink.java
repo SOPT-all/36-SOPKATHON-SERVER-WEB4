@@ -26,10 +26,13 @@ public class Drink extends BaseEntity {
 
   private String location;
 
+  private String imageLink;
+
   @Builder
-  public Drink(final String name, final String description, final String location) {
+  public Drink(final String name, final String description, final String location, final String imageLink) {
     this.name = name;
     this.description = description;
     this.location = location;
+    this.imageLink = imageLink;
   }
 }
