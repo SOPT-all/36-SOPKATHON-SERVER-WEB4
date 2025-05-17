@@ -44,7 +44,8 @@ jobs:
           username: ${{ secrets.EC2_USER }}
           key: ${{ secrets.EC2_SSH_KEY }}
           script: |
-            cd cd ${{ secrets.DEPLOY_PROJECT_PATH }}
+            cd ${{ secrets.DEPLOY_PROJECT_PATH }}
+            cd ~/DOMAINS/safe-bridge
             docker-compose pull
             docker-compose down
             # docker-compose.yml에서 run 환경변수 지정 필요
