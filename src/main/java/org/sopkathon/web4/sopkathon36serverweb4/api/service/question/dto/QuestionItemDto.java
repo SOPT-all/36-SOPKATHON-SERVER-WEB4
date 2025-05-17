@@ -13,7 +13,7 @@ public record QuestionItemDto(
   @Builder
   public record QuestionOptionDto(
       Long id,
-      String title
+      String description
   ) {
 
 
